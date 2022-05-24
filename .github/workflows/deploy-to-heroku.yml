@@ -1,0 +1,26 @@
+name: Deploy To Heroku
+
+on: push
+
+jobs:
+  echo-input:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/github-script@v6
+
+        with:
+          script: |
+            const { default: deployToHeroku } = await import('${{ github.workspace }}/scripts/deploy-to-heroku.js')
+
+            await deployToHeroku({
+              github,
+              context,
+              core,
+              glob,
+              io,
+              exec,
+              require
+            })
