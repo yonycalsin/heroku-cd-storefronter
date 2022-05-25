@@ -3,27 +3,38 @@ name: Deploy To Heroku
 on: push
 
 jobs:
-  echo-input:
+  # echo-input:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - uses: actions/checkout@v2
+
+  #     - uses: actions/github-script@v6
+  #       env:
+  #         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+  #         heroku_email: ${{ secrets.HEROKU_EMAIL }}
+  #         heroku_app_name: 'storefronter-staging'
+  #       with:
+  #         script: |
+  #           const deployToHeroku = require('${{ github.workspace }}/scripts/deploy-to-heroku.js')
+
+  #           await deployToHeroku({
+  #             github,
+  #             context,
+  #             core,
+  #             glob,
+  #             io,
+  #             exec,
+  #             require
+  #           })
+
+  deploy_to_heroku:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/github-script@v6
-        env:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          heroku_app_name: 'storefronter-staging'
+      - name: Deploying to Heroku
+        uses: yonycalsin/deploy-simple-to-heroku@v1.0.0
         with:
-          script: |
-            const deployToHeroku = require('${{ github.workspace }}/scripts/deploy-to-heroku.js')
-
-            await deployToHeroku({
-              github,
-              context,
-              core,
-              glob,
-              io,
-              exec,
-              require
-            })
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }} # Your account email
+          heroku_app_name: 'storefronter-staging' # Must be unique in Heroku
