@@ -1,3 +1,5 @@
+const { execSync } = require('child_process');
+
 function createNetrcFileCommand(config) {
   const { heroku_api_key, heroku_email } = config;
 
@@ -33,7 +35,7 @@ async function deployToHeroku(actionContext) {
 
   core.debug(`Config: ${JSON.stringify(config)}`);
 
-  await exec.exec(createNetrcFileCommand(config));
+  await execSync(createNetrcFileCommand(config));
 
   core.info('Successfully logged into heroku');
 
