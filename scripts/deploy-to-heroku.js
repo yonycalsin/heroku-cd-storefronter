@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { execSync } = require('child_process');
 
 function createNetrcFileCommand(config) {
@@ -25,7 +26,7 @@ function deployToHerokuCommand() {
 }
 
 async function deployToHeroku(actionContext) {
-  const { core, exec } = actionContext;
+  const { core } = actionContext;
 
   const config = {
     heroku_api_key: process.env.heroku_api_key,
