@@ -10,7 +10,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - uses: actions/github-script@v6
-
+        env:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
         with:
           script: |
             const deployToHeroku = require('${{ github.workspace }}/scripts/deploy-to-heroku.js')
