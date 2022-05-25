@@ -13,7 +13,7 @@ jobs:
 
         with:
           script: |
-            const { default: deployToHeroku } = await import('${{ github.workspace }}/scripts/deploy-to-heroku.js')
+            const deployToHeroku = require('${{ github.workspace }}/scripts/deploy-to-heroku.js')
 
             await deployToHeroku({
               github,
