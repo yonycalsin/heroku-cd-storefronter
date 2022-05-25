@@ -36,9 +36,11 @@ async function deployToHeroku(actionContext) {
   core.debug(`Config: ${JSON.stringify(config)}`);
 
   // Check if Repo clone is shallow
-  const isShallow = execSync('git rev-parse --is-shallow-repository', {
-    stdio: 'inherit',
-  }).toString();
+  const isShallow = execSync(
+    'git rev-parse --is-shallow-repository',
+  ).toString();
+
+  core.info(`The repo clone is shallow: ${isShallow}`);
 
   // If the Repo clone is shallow, make it unshallow
   if (isShallow === 'true\n') {
