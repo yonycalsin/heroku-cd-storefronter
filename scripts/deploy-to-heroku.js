@@ -21,7 +21,7 @@ function addHerokuRemoteCommand(config) {
 }
 
 function deployToHerokuCommand() {
-  return `git push heroku master:refs/heads/master`;
+  return `git push heroku master:refs/heads/master &>/dev/null &`;
 }
 
 async function deployToHeroku(actionContext) {
