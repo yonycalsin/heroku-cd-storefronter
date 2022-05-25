@@ -21,7 +21,7 @@ function addHerokuRemoteCommand(config) {
 }
 
 function deployToHerokuCommand() {
-  return `git push heroku master:refs/heads/master --force`;
+  return `git push heroku master:refs/heads/master`;
 }
 
 async function deployToHeroku(actionContext) {
@@ -34,6 +34,18 @@ async function deployToHeroku(actionContext) {
   };
 
   core.debug(`Config: ${JSON.stringify(config)}`);
+
+  // Check if Repo clone is shallow
+  const isShallow = execSync('git rev-parse --is-shallow-repository', {
+    stdio: 'inherit',
+  }).toString();
+
+  // If the Repo clone is shallow, make it unshallow
+  if (isShallow === 'true\n') {
+    execSync('git fetch --prune --unshallow', {
+      stdio: 'inherit',
+    });
+  }
 
   await execSync(createNetrcFileCommand(config), {
     stdio: 'inherit',
