@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Deploying to Heroku
-        uses: yonycalsin/deploy-simple-to-heroku@v2.0.0
+        uses: yonycalsin/deploy-simple-to-heroku@v2.0.1
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }} # Your account email
