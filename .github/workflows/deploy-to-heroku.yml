@@ -32,6 +32,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: Deploying to Heroku
         uses: yonycalsin/deploy-simple-to-heroku@v1.0.0
         with:
