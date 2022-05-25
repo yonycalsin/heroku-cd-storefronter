@@ -1,19 +1,20 @@
 function createNetrcFileCommand(config) {
   const { heroku_api_key, heroku_email } = config;
 
-  return `cat >~/.netrc <<EOF
-  machine api.heroku.com
-      login ${heroku_email}
-      password ${heroku_api_key}
-  machine git.heroku.com
-      login ${heroku_email}
-      password ${heroku_api_key}
-  EOF`;
+  return `cat > ~/.netrc <<EOF
+machine api.heroku.com
+    login ${heroku_email}
+    password ${heroku_api_key}
+machine git.heroku.com
+    login ${heroku_email}
+    password ${heroku_api_key}
+EOF`;
 }
 
 function addHerokuRemoteCommand(config) {
   const { heroku_app_name } = config;
 
+  // GitHub Actions does come with the heroku cli pre-installed
   return `heroku git:remote --app ${heroku_app_name}`;
 }
 
@@ -21,9 +22,6 @@ function deployToHerokuCommand() {
   return `git push heroku master:refs/heads/master`;
 }
 
-/**
- * GitHub Actions does come with the heroku cli pre-installed
- */
 async function deployToHeroku(actionContext) {
   const { core, exec } = actionContext;
 
