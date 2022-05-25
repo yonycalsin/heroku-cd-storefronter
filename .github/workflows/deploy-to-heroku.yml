@@ -13,7 +13,7 @@ jobs:
         env:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          heroku_app_name: 'storefront-staging'
+          heroku_app_name: 'storefronter-staging'
         with:
           script: |
             const deployToHeroku = require('${{ github.workspace }}/scripts/deploy-to-heroku.js')
