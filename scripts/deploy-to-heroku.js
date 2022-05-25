@@ -35,15 +35,15 @@ async function deployToHeroku(actionContext) {
 
   core.debug(`Config: ${JSON.stringify(config)}`);
 
-  await execSync(createNetrcFileCommand(config));
+  console.log(await execSync(createNetrcFileCommand(config)));
 
   core.info('Successfully logged into heroku');
 
-  await exec.exec(addHerokuRemoteCommand(config));
+  console.log(await execSync(addHerokuRemoteCommand(config)));
 
   core.info('Added git remote heroku');
 
-  await exec.exec(deployToHerokuCommand());
+  console.log(await execSync(deployToHerokuCommand()));
 
   core.info(`${config.heroku_app_name} successfully deployed on heroku`);
 }
